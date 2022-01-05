@@ -35,6 +35,23 @@ class BlockChain {
         newblock.hash  = newblock.calculateHash();
         this.chain.push(newblock);
     }
+
+    isChainValid(){
+        for(let i = 1 ;i < this.chain.length ;i++){
+            const  currentBlock = this.chain[i] ;
+            const  previousBlock = this.chain[i - 1] ; 
+
+            if(currentBlock.hash !== currentBlock.calculateHash()){
+                return false ;
+            }
+
+            if(currentBlock.previousHash !== previousBlock.hash){
+                return false ;
+            }
+        }
+
+        return true;
+    }
 }
 
 
@@ -46,3 +63,14 @@ zonCoin.addBlock(new Block(2,'03/01/2022',{ amount : 20 }));
 
 
 console.log(JSON.stringify(zonCoin,null ,4));
+
+
+console.log('is zoncoind valid  ? '+ zonCoin.isChainValid());
+
+zonCoin.chain[2].data = { amount: 21 };
+zonCoin.chain[2].hash = zonCoin.chain[1].calculateHash();
+
+console.log('is zoncoind valid  ? '+ zonCoin.isChainValid());
+
+console.log(JSON.stringify(zonCoin,null ,4));
+
