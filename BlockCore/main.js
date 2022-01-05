@@ -29,11 +29,9 @@ class Block{
 
 class BlockChain {
     
-
-
     constructor(){
         this.chain =  [this.createGenesisBlock()] ;
-        this.difficulty = 2 ;
+        this.difficulty = 5 ;
     }
 
     createGenesisBlock( ){
@@ -72,19 +70,13 @@ class BlockChain {
 
 let zonCoin = new BlockChain() ;
 
+console.log('mining block 1 ...')
+
 zonCoin.addBlock(new Block(1,'02/01/2022',{ amount : 10 }));
+
+console.log('mining block 2 ...')
 zonCoin.addBlock(new Block(2,'03/01/2022',{ amount : 20 }));
 
 
-console.log(JSON.stringify(zonCoin,null ,4));
 
-
-console.log('is zoncoind valid  ? '+ zonCoin.isChainValid());
-
-zonCoin.chain[2].data = { amount: 21 };
-zonCoin.chain[2].hash = zonCoin.chain[1].calculateHash();
-
-console.log('is zoncoind valid  ? '+ zonCoin.isChainValid());
-
-console.log(JSON.stringify(zonCoin,null ,4));
 
